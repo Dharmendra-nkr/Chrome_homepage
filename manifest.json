@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Sunday New Tab",
+  "version": "1.0.0",
+  "description": "A beautiful custom new tab page with daily quotes and shortcuts",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "assets/chatgpt.png",
+    "48": "assets/chatgpt.png",
+    "128": "assets/chatgpt.png"
+  }
+}

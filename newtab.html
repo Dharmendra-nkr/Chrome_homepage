@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left side shortcuts -->
+        <div class="shortcuts-left">
+            <div class="shortcut" data-index="0">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 1</div>
+            </div>
+            <div class="shortcut" data-index="1">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 2</div>
+            </div>
+            <div class="shortcut" data-index="2">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 3</div>
+            </div>
+            <div class="shortcut" data-index="3">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 4</div>
+            </div>
+            <div class="shortcut" data-index="4">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 5</div>
+            </div>
+            <div class="shortcut" data-index="5">
+                <div class="shortcut-circle"></div>
+                <div class="shortcut-label">Shortcut 6</div>
+            </div>
+            <div class="edit-shortcut" id="editBtn">Edit shortcut</div>
+        </div>
+
+        <!-- Center content -->
+        <div class="center-content">
+            <div class="header">
+                <div class="day-name" id="dayName">Sunday</div>
+                <div class="date" id="date">30 NOVEMBER 2025</div>
+            </div>
+            
+            <div class="clock" id="clock">21:55:01</div>
+            
+            <div class="quote-container">
+                <div class="quote-text" id="quoteText">With the new day comes new strength and new thoughts.</div>
+                <div class="quote-author" id="quoteAuthor">ELEANOR ROOSEVELT</div>
+            </div>
+        </div>
+
+        <!-- Right side AI shortcuts -->
+        <div class="ai-revolver-container">
+            <div class="ai-revolver" id="aiRevolver">
+                <div class="revolver-center"></div>
+                <div class="revolver-cylinder" id="revolverCylinder">
+                    <div class="revolver-tool" style="--angle: 0deg;" data-tool="ChatGPT">
+                        <div class="tool-circle">
+                            <img src="assets/chatgpt.png" alt="ChatGPT">
+                        </div>
+                        <span class="tool-label">ChatGPT</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 60deg;" data-tool="Gemini">
+                        <div class="tool-circle">
+                            <img src="assets/Gemini.jpg" alt="Gemini">
+                        </div>
+                        <span class="tool-label">Gemini</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 120deg;" data-tool="Groq">
+                        <div class="tool-circle">
+                            <img src="assets/Grok.png" alt="Groq">
+                        </div>
+                        <span class="tool-label">Groq</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 180deg;" data-tool="Claude">
+                        <div class="tool-circle">
+                            <img src="assets/claude.png" alt="Claude">
+                        </div>
+                        <span class="tool-label">Claude</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 240deg;" data-tool="GitHub">
+                        <div class="tool-circle">
+                            <img src="assets/GitHub.png" alt="GitHub">
+                        </div>
+                        <span class="tool-label">GitHub</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 300deg;" data-tool="LinkedIn">
+                        <div class="tool-circle">
+                            <img src="assets/LinikedIn.webp" alt="LinkedIn">
+                        </div>
+                        <span class="tool-label">LinkedIn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Shortcut</h2>
+            <input type="text" id="shortcutLabel" placeholder="Label (e.g., YouTube)">
+            <input type="text" id="shortcutUrl" placeholder="URL (e.g., https://youtube.com)">
+            <div class="modal-buttons">
+                <button class="modal-btn btn-cancel" id="cancelEdit">Cancel</button>
+                <button class="modal-btn btn-save" id="saveEdit">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="revolver.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
