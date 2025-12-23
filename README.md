@@ -1,4 +1,4 @@
-# Sunday New Tab - Chrome Extension
+# Homepage - Chrome Extension
 
 A beautiful, customizable Chrome new tab page featuring an elegant time display, daily quotes, and quick access shortcuts to your favorite AI tools and websites.
 
