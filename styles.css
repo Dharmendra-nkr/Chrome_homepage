@@ -590,11 +590,11 @@ body {
 /* Top-center glass shortcuts */
 .top-shortcuts {
     position: fixed;
-    top: 28px;
+    top: 140px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 22px;
+    gap: 56px;
     align-items: center;
     justify-content: center;
     z-index: 2000;
@@ -609,8 +609,8 @@ body {
 }
 
 .glass-shortcut {
-    width: 96px;
-    height: 96px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -644,7 +644,7 @@ body {
 
 .glass-initial {
     font-family: 'Athena', sans-serif;
-    font-size: 42px;
+    font-size: 54px;
     font-weight: 800;
     letter-spacing: 1px;
     position: relative;
@@ -652,9 +652,9 @@ body {
 }
 
 .glass-label {
-    margin-top: 8px;
+    margin-top: 14px;
     font-family: 'Verdana', sans-serif;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 700;
     color: #ffffff;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);

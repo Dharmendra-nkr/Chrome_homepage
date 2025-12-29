@@ -83,23 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isHovered) {
             e.preventDefault();
             
-            if (!isAnimating) {
-                // Disable transition during scroll for immediate response
-                revolverCylinder.style.transition = 'none';
-            }
+            // Always disable transition during active scrolling for immediate response
+            revolverCylinder.style.transition = 'none';
             
             const delta = e.deltaY;
-            // Very smooth scroll sensitivity
-            currentRotation += delta * 0.15;
+            // Inverted rotation: scroll down = anti-clockwise
+            currentRotation -= delta * 0.25;
             revolverCylinder.style.transform = `rotate(${currentRotation}deg)`;
-            
-            // Clear previous timeout
-            clearTimeout(wheelTimeout);
-            
-            // Snap to position after user stops scrolling
-            wheelTimeout = setTimeout(() => {
-                snapToPosition();
-            }, 400);
         }
     }, { passive: false });
     
