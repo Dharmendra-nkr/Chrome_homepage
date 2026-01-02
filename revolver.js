@@ -111,8 +111,8 @@ function initRevolver(revolverId, cylinderId) {
     }, { passive: false });
     
     // Handle tool clicks
-    const tools = revolver.querySelectorAll('.revolver-tool');
-    tools.forEach((tool) => {
+    const toolElements = revolver.querySelectorAll('.revolver-tool');
+    toolElements.forEach((tool) => {
         tool.addEventListener('click', function() {
             if (!isAnimating) {
                 const toolName = this.dataset.tool;
@@ -129,8 +129,7 @@ function initRevolver(revolverId, cylinderId) {
     revolverCylinder.style.transform = `rotate(${currentRotation}deg)`;
     
     // Initialize tool content to stay upright
-    const tools = revolver.querySelectorAll('.revolver-tool');
-    tools.forEach((tool) => {
+    toolElements.forEach((tool) => {
         const toolCircle = tool.querySelector('.tool-circle');
         const toolLabel = tool.querySelector('.tool-label');
         if (toolCircle) toolCircle.style.transform = `rotate(${-currentRotation}deg)`;
