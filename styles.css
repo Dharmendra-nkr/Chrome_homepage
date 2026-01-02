@@ -349,6 +349,12 @@ body {
     overflow: visible;
 }
 
+/* Left revolver positioning */
+.left-revolver-container {
+    right: auto;
+    left: -900px;
+}
+
 .ai-revolver {
     position: relative;
     width: 100%;
@@ -587,14 +593,35 @@ body {
     letter-spacing: normal;
 }
 
+/* Curved glass top bar */
+.glass-top-bar {
+    position: fixed;
+    top: -400px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 800px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-top: none;
+    border-radius: 50%;
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    z-index: 1999;
+    pointer-events: none;
+}
+
 /* Top-center glass shortcuts */
 .top-shortcuts {
     position: fixed;
-    top: 140px;
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 56px;
+    gap: 200px;
     align-items: center;
     justify-content: center;
     z-index: 2000;
@@ -609,8 +636,8 @@ body {
 }
 
 .glass-shortcut {
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -644,7 +671,7 @@ body {
 
 .glass-initial {
     font-family: 'Athena', sans-serif;
-    font-size: 54px;
+    font-size: 72px;
     font-weight: 800;
     letter-spacing: 1px;
     position: relative;
@@ -654,10 +681,47 @@ body {
 .glass-label {
     margin-top: 14px;
     font-family: 'Verdana', sans-serif;
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 700;
     color: #ffffff;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     user-select: none;
+}
+
+/* Brand-specific colors for each shortcut */
+.top-shortcut-item:nth-child(1) .glass-shortcut {
+    background: linear-gradient(135deg, rgba(234, 67, 53, 0.35) 0%, rgba(234, 67, 53, 0.15) 100%);
+    border-color: rgba(234, 67, 53, 0.6);
+}
+
+.top-shortcut-item:nth-child(1) .glass-shortcut:hover {
+    border-color: rgba(234, 67, 53, 0.9);
+}
+
+.top-shortcut-item:nth-child(2) .glass-shortcut {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.35) 0%, rgba(75, 0, 130, 0.15) 100%);
+    border-color: rgba(138, 43, 226, 0.6);
+}
+
+.top-shortcut-item:nth-child(2) .glass-shortcut:hover {
+    border-color: rgba(138, 43, 226, 0.9);
+}
+
+.top-shortcut-item:nth-child(3) .glass-shortcut {
+    background: linear-gradient(135deg, rgba(0, 120, 212, 0.35) 0%, rgba(0, 120, 212, 0.15) 100%);
+    border-color: rgba(0, 120, 212, 0.6);
+}
+
+.top-shortcut-item:nth-child(3) .glass-shortcut:hover {
+    border-color: rgba(0, 120, 212, 0.9);
+}
+
+.top-shortcut-item:nth-child(4) .glass-shortcut {
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.35) 0%, rgba(37, 211, 102, 0.15) 100%);
+    border-color: rgba(37, 211, 102, 0.6);
+}
+
+.top-shortcut-item:nth-child(4) .glass-shortcut:hover {
+    border-color: rgba(37, 211, 102, 0.9);
 }
 

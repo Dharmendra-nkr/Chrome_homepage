@@ -1,7 +1,15 @@
 // AI Revolver Widget Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const revolver = document.getElementById('aiRevolver');
-    const revolverCylinder = document.getElementById('revolverCylinder');
+    // Initialize both revolvers
+    initRevolver('aiRevolver', 'revolverCylinder');
+    initRevolver('aiRevolverLeft', 'revolverCylinderLeft');
+});
+
+function initRevolver(revolverId, cylinderId) {
+    const revolver = document.getElementById(revolverId);
+    const revolverCylinder = document.getElementById(cylinderId);
+    
+    if (!revolver || !revolverCylinder) return;
     
     let currentRotation = -120;
     let isHovered = false;
@@ -90,11 +98,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Inverted rotation: scroll down = anti-clockwise
             currentRotation -= delta * 0.25;
             revolverCylinder.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Keep tool content upright by counter-rotating
+            const tools = revolver.querySelectorAll('.revolver-tool');
+            tools.forEach((tool) => {
+                const toolCircle = tool.querySelector('.tool-circle');
+                const toolLabel = tool.querySelector('.tool-label');
+                if (toolCircle) toolCircle.style.transform = `rotate(${-currentRotation}deg)`;
+                if (toolLabel) toolLabel.style.transform = `translateX(-50%) rotate(${-currentRotation}deg)`;
+            });
         }
     }, { passive: false });
     
     // Handle tool clicks
-    const tools = document.querySelectorAll('.revolver-tool');
+    const tools = revolver.querySelectorAll('.revolver-tool');
     tools.forEach((tool) => {
         tool.addEventListener('click', function() {
             if (!isAnimating) {
@@ -110,4 +127,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize position with smooth animation
     revolverCylinder.style.transition = 'transform 0.05s linear';
     revolverCylinder.style.transform = `rotate(${currentRotation}deg)`;
-});
+    
+    // Initialize tool content to stay upright
+    const tools = revolver.querySelectorAll('.revolver-tool');
+    tools.forEach((tool) => {
+        const toolCircle = tool.querySelector('.tool-circle');
+        const toolLabel = tool.querySelector('.tool-label');
+        if (toolCircle) toolCircle.style.transform = `rotate(${-currentRotation}deg)`;
+        if (toolLabel) toolLabel.style.transform = `translateX(-50%) rotate(${-currentRotation}deg)`;
+    });
+}

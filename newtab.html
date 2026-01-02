@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Curved glass top bar -->
+    <div class="glass-top-bar"></div>
+    
     <!-- Top-center glass shortcuts (non-intrusive overlay) -->
     <div class="top-shortcuts" aria-label="Quick access shortcuts">
         <div class="top-shortcut-item">
@@ -62,6 +65,51 @@
                 <div class="shortcut-label">Shortcut 6</div>
             </div>
             <div class="edit-shortcut" id="editBtn">Edit shortcut</div>
+        </div>
+
+        <!-- Left side AI shortcuts -->
+        <div class="ai-revolver-container left-revolver-container">
+            <div class="ai-revolver" id="aiRevolverLeft">
+                <div class="revolver-center"></div>
+                <div class="revolver-cylinder" id="revolverCylinderLeft">
+                    <div class="revolver-tool" style="--angle: 0deg;" data-tool="ChatGPT">
+                        <div class="tool-circle">
+                            <img src="assets/chatgpt.png" alt="ChatGPT">
+                        </div>
+                        <span class="tool-label">ChatGPT</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 60deg;" data-tool="Gemini">
+                        <div class="tool-circle">
+                            <img src="assets/Gemini.jpg" alt="Gemini">
+                        </div>
+                        <span class="tool-label">Gemini</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 120deg;" data-tool="Groq">
+                        <div class="tool-circle">
+                            <img src="assets/Grok.png" alt="Groq">
+                        </div>
+                        <span class="tool-label">Groq</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 180deg;" data-tool="Claude">
+                        <div class="tool-circle">
+                            <img src="assets/claude.png" alt="Claude">
+                        </div>
+                        <span class="tool-label">Claude</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 240deg;" data-tool="GitHub">
+                        <div class="tool-circle">
+                            <img src="assets/GitHub.png" alt="GitHub">
+                        </div>
+                        <span class="tool-label">GitHub</span>
+                    </div>
+                    <div class="revolver-tool" style="--angle: 300deg;" data-tool="LinkedIn">
+                        <div class="tool-circle">
+                            <img src="assets/LinikedIn.webp" alt="LinkedIn">
+                        </div>
+                        <span class="tool-label">LinkedIn</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Center content -->
