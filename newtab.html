@@ -67,46 +67,46 @@
             <div class="edit-shortcut" id="editBtn">Edit shortcut</div>
         </div>
 
-        <!-- Left side AI shortcuts -->
+        <!-- Left side custom shortcuts -->
         <div class="ai-revolver-container left-revolver-container">
             <div class="ai-revolver" id="aiRevolverLeft">
                 <div class="revolver-center"></div>
                 <div class="revolver-cylinder" id="revolverCylinderLeft">
-                    <div class="revolver-tool" style="--angle: 0deg;" data-tool="ChatGPT">
-                        <div class="tool-circle">
-                            <img src="assets/chatgpt.png" alt="ChatGPT">
+                    <div class="revolver-tool" style="--angle: 0deg;" data-slot="0">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">ChatGPT</span>
+                        <span class="tool-label">Add</span>
                     </div>
-                    <div class="revolver-tool" style="--angle: 60deg;" data-tool="Gemini">
-                        <div class="tool-circle">
-                            <img src="assets/Gemini.jpg" alt="Gemini">
+                    <div class="revolver-tool" style="--angle: 60deg;" data-slot="1">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">Gemini</span>
+                        <span class="tool-label">Add</span>
                     </div>
-                    <div class="revolver-tool" style="--angle: 120deg;" data-tool="Groq">
-                        <div class="tool-circle">
-                            <img src="assets/Grok.png" alt="Groq">
+                    <div class="revolver-tool" style="--angle: 120deg;" data-slot="2">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">Groq</span>
+                        <span class="tool-label">Add</span>
                     </div>
-                    <div class="revolver-tool" style="--angle: 180deg;" data-tool="Claude">
-                        <div class="tool-circle">
-                            <img src="assets/claude.png" alt="Claude">
+                    <div class="revolver-tool" style="--angle: 180deg;" data-slot="3">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">Claude</span>
+                        <span class="tool-label">Add</span>
                     </div>
-                    <div class="revolver-tool" style="--angle: 240deg;" data-tool="GitHub">
-                        <div class="tool-circle">
-                            <img src="assets/GitHub.png" alt="GitHub">
+                    <div class="revolver-tool" style="--angle: 240deg;" data-slot="4">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">GitHub</span>
+                        <span class="tool-label">Add</span>
                     </div>
-                    <div class="revolver-tool" style="--angle: 300deg;" data-tool="LinkedIn">
-                        <div class="tool-circle">
-                            <img src="assets/LinikedIn.webp" alt="LinkedIn">
+                    <div class="revolver-tool" style="--angle: 300deg;" data-slot="5">
+                        <div class="tool-circle custom-slot">
+                            <span class="plus-sign">+</span>
                         </div>
-                        <span class="tool-label">LinkedIn</span>
+                        <span class="tool-label">Add</span>
                     </div>
                 </div>
             </div>
@@ -181,6 +181,40 @@
             <div class="modal-buttons">
                 <button class="modal-btn btn-cancel" id="cancelEdit">Cancel</button>
                 <button class="modal-btn btn-save" id="saveEdit">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding custom shortcuts (left revolver) -->
+    <div id="customShortcutModal" class="modal">
+        <div class="modal-content custom-modal">
+            <h2>Add Custom Shortcut</h2>
+            
+            <div class="form-group">
+                <label>Website Name</label>
+                <input type="text" id="customName" placeholder="e.g., LinkedIn">
+            </div>
+            
+            <div class="form-group">
+                <label>Website Link</label>
+                <input type="text" id="customLink" placeholder="https://example.com">
+            </div>
+            
+            <div class="form-group">
+                <label>Icon Image (Optional - drag & drop or click)</label>
+                <div class="drag-drop-area" id="dragDropArea">
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <div class="drag-drop-text">Drag & drop image here or click to upload</div>
+                    <div class="preview-container">
+                        <img id="imagePreview" alt="preview" style="display: none;">
+                    </div>
+                </div>
+                <small>If no image, first letter of name will be used</small>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn btn-cancel" id="cancelCustom">Cancel</button>
+                <button class="modal-btn btn-save" id="saveCustom">Save Shortcut</button>
             </div>
         </div>
     </div>

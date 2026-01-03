@@ -1,11 +1,14 @@
 // AI Revolver Widget Functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize both revolvers
-    initRevolver('aiRevolver', 'revolverCylinder');
-    initRevolver('aiRevolverLeft', 'revolverCylinderLeft');
+    initRevolver('aiRevolver', 'revolverCylinder', false);
+    initRevolver('aiRevolverLeft', 'revolverCylinderLeft', true);
+    
+    // Set up custom shortcut modal handlers
+    setupCustomShortcutModal();
 });
 
-function initRevolver(revolverId, cylinderId) {
+function initRevolver(revolverId, cylinderId, isCustom = false) {
     const revolver = document.getElementById(revolverId);
     const revolverCylinder = document.getElementById(cylinderId);
     
@@ -114,11 +117,18 @@ function initRevolver(revolverId, cylinderId) {
     const toolElements = revolver.querySelectorAll('.revolver-tool');
     toolElements.forEach((tool) => {
         tool.addEventListener('click', function() {
-            if (!isAnimating) {
-                const toolName = this.dataset.tool;
-                const url = aiTools[toolName];
-                if (url) {
-                    window.open(url, '_blank');
+            if (isCustom) {
+                // For left revolver - open modal to add/edit custom shortcut
+                const slot = this.getAttribute('data-slot');
+                openCustomShortcutModal(slot);
+            } else {
+                // For right revolver - open tool links
+                if (!isAnimating) {
+                    const toolName = this.dataset.tool;
+                    const url = aiTools[toolName];
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
                 }
             }
         });
@@ -135,4 +145,210 @@ function initRevolver(revolverId, cylinderId) {
         if (toolCircle) toolCircle.style.transform = `rotate(${-currentRotation}deg)`;
         if (toolLabel) toolLabel.style.transform = `translateX(-50%) rotate(${-currentRotation}deg)`;
     });
+    
+    // Load custom shortcuts if left revolver
+    if (isCustom) {
+        loadCustomShortcuts();
+    }
+}
+
+// Custom shortcut modal functions
+let currentSlotIndex = null;
+
+function openCustomShortcutModal(slot) {
+    console.log('Opening custom shortcut modal for slot:', slot);
+    currentSlotIndex = parseInt(slot);
+    const customShortcuts = JSON.parse(localStorage.getItem('customShortcuts') || '{}');
+    const shortcut = customShortcuts[slot] || {};
+    
+    document.getElementById('customName').value = shortcut.name || '';
+    document.getElementById('customLink').value = shortcut.link || '';
+    document.getElementById('imagePreview').style.display = 'none';
+    document.getElementById('imageUpload').value = '';
+    
+    if (shortcut.image) {
+        document.getElementById('imagePreview').src = shortcut.image;
+        document.getElementById('imagePreview').style.display = 'block';
+    }
+    
+    const modal = document.getElementById('customShortcutModal');
+    modal.style.display = 'flex';
+    console.log('Modal displayed:', modal.style.display);
+}
+
+function setupCustomShortcutModal() {
+    const modal = document.getElementById('customShortcutModal');
+    const dragDropArea = document.getElementById('dragDropArea');
+    const imageUpload = document.getElementById('imageUpload');
+    const imagePreview = document.getElementById('imagePreview');
+    const cancelBtn = document.getElementById('cancelCustom');
+    const saveBtn = document.getElementById('saveCustom');
+    
+    console.log('Setting up modal - Modal:', modal, 'Cancel:', cancelBtn, 'Save:', saveBtn);
+    
+    if (!modal || !cancelBtn || !saveBtn) {
+        console.error('Modal elements not found!', {modal, cancelBtn, saveBtn});
+        return;
+    }
+    
+    // Prevent modal close when clicking inside modal-content
+    modal.addEventListener('click', (e) => {
+        console.log('Modal clicked, target:', e.target.id);
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            currentSlotIndex = null;
+        }
+    });
+    
+    // Drag and drop handlers
+    dragDropArea.addEventListener('click', () => {
+        console.log('Drag drop area clicked');
+        imageUpload.click();
+    });
+    
+    dragDropArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dragDropArea.classList.add('dragover');
+    });
+    
+    dragDropArea.addEventListener('dragleave', () => {
+        dragDropArea.classList.remove('dragover');
+    });
+    
+    dragDropArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragDropArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        console.log('Files dropped:', files.length);
+        if (files.length > 0) {
+            handleImageUpload(files[0]);
+        }
+    });
+    
+    imageUpload.addEventListener('change', (e) => {
+        console.log('Image file selected');
+        if (e.target.files.length > 0) {
+            handleImageUpload(e.target.files[0]);
+        }
+    });
+    
+    // Ensure buttons are clickable and properly bound
+    cancelBtn.onclick = (e) => {
+        console.log('Cancel button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        modal.style.display = 'none';
+        currentSlotIndex = null;
+    };
+    
+    saveBtn.onclick = (e) => {
+        console.log('Save button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        saveCustomShortcut();
+    };
+    
+    console.log('Modal setup complete');
+}
+
+function handleImageUpload(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        document.getElementById('imagePreview').src = e.target.result;
+        document.getElementById('imagePreview').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+function saveCustomShortcut() {
+    console.log('Save custom shortcut called');
+    const name = document.getElementById('customName').value.trim();
+    const link = document.getElementById('customLink').value.trim();
+    const imagePreview = document.getElementById('imagePreview');
+    const image = imagePreview.style.display !== 'none' ? imagePreview.src : '';
+    
+    console.log('Form data:', {name, link, image: image ? 'yes' : 'no'});
+    
+    if (!name) {
+        alert('Please enter a website name');
+        return;
+    }
+    
+    if (!link) {
+        alert('Please enter a website link');
+        return;
+    }
+    
+    // Ensure link has protocol
+    let finalLink = link;
+    if (!finalLink.startsWith('http://') && !finalLink.startsWith('https://')) {
+        finalLink = 'https://' + finalLink;
+    }
+    
+    const customShortcuts = JSON.parse(localStorage.getItem('customShortcuts') || '{}');
+    customShortcuts[currentSlotIndex] = {
+        name: name,
+        link: finalLink,
+        image: image
+    };
+    
+    localStorage.setItem('customShortcuts', JSON.stringify(customShortcuts));
+    console.log('Shortcut saved:', customShortcuts[currentSlotIndex]);
+    
+    // Update the UI
+    updateCustomShortcutUI(currentSlotIndex, customShortcuts[currentSlotIndex]);
+    
+    // Close modal
+    document.getElementById('customShortcutModal').style.display = 'none';
+    currentSlotIndex = null;
+    console.log('Modal closed');
+}
+
+function loadCustomShortcuts() {
+    const customShortcuts = JSON.parse(localStorage.getItem('customShortcuts') || '{}');
+    
+    for (let i = 0; i < 6; i++) {
+        if (customShortcuts[i]) {
+            updateCustomShortcutUI(i, customShortcuts[i]);
+        }
+    }
+}
+
+function updateCustomShortcutUI(slot, shortcutData) {
+    const revolver = document.getElementById('aiRevolverLeft');
+    const tool = revolver.querySelector(`[data-slot="${slot}"]`);
+    
+    if (!tool) return;
+    
+    const toolCircle = tool.querySelector('.tool-circle');
+    const toolLabel = tool.querySelector('.tool-label');
+    
+    toolCircle.classList.remove('custom-slot');
+    toolCircle.innerHTML = '';
+    
+    toolLabel.textContent = shortcutData.name;
+    
+    if (shortcutData.image) {
+        const img = document.createElement('img');
+        img.src = shortcutData.image;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '50%';
+        toolCircle.appendChild(img);
+    } else {
+        // Use first letter
+        const firstLetter = shortcutData.name.charAt(0).toUpperCase();
+        toolCircle.style.background = 'linear-gradient(135deg, rgba(100, 150, 255, 0.6) 0%, rgba(50, 100, 200, 0.3) 100%)';
+        toolCircle.style.fontSize = '80px';
+        toolCircle.style.fontWeight = '800';
+        toolCircle.style.color = '#ffffff';
+        toolCircle.textContent = firstLetter;
+    }
+    
+    // Update click handler to open the link instead
+    tool.onclick = (e) => {
+        e.stopPropagation();
+        window.open(shortcutData.link, '_blank');
+    };
 }

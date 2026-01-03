@@ -134,6 +134,7 @@ body {
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    pointer-events: auto;
 }
 
 /* Modal content */
@@ -145,6 +146,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 60px; /* Increased gap for better spacing */
+    pointer-events: auto;
 }
 
 .modal-content h2 {
@@ -174,6 +176,7 @@ body {
     justify-content: flex-end;
     gap: 20px; /* Adjusted gap for better spacing */
     margin-top: 20px; /* Adjusted margin */
+    pointer-events: auto;
 }
 
 .modal-btn {
@@ -183,6 +186,7 @@ body {
     cursor: pointer;
     font-size: 28px; /* Increased font size */
     font-family: Arial, sans-serif;
+    pointer-events: auto;
 }
 
 .btn-save {
@@ -194,6 +198,102 @@ body {
 .btn-cancel {
     background-color: #eee;
     color: #333;
+}
+
+/* Custom shortcut modal styles */
+.custom-modal {
+    width: 1600px;
+    padding: 120px;
+    gap: 80px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    font-size: 40px;
+    color: #333;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.form-group input[type="text"] {
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 36px;
+    font-family: Arial, sans-serif;
+}
+
+.drag-drop-area {
+    border: 3px dashed #3DFFCC;
+    border-radius: 10px;
+    padding: 100px;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgba(61, 255, 204, 0.05);
+    transition: all 0.3s ease;
+}
+
+.drag-drop-area:hover {
+    background-color: rgba(61, 255, 204, 0.1);
+    border-color: #33CCAA;
+}
+
+.drag-drop-area.dragover {
+    background-color: rgba(61, 255, 204, 0.2);
+    border-color: #3DFFCC;
+}
+
+.drag-drop-text {
+    font-size: 32px;
+    color: #666;
+    font-family: Arial, sans-serif;
+}
+
+.preview-container {
+    margin-top: 50px;
+}
+
+.preview-container img {
+    max-width: 280px;
+    max-height: 280px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-group small {
+    font-size: 18px;
+    color: #999;
+    margin-top: 10px;
+}
+
+/* Custom slot styling for left revolver */
+.custom-slot {
+    background: linear-gradient(135deg, rgba(200, 200, 200, 0.3) 0%, rgba(150, 150, 150, 0.1) 100%) !important;
+    border: 2px dashed rgba(200, 200, 200, 0.6) !important;
+}
+
+.plus-sign {
+    font-size: 80px;
+    font-weight: 300;
+    color: rgba(100, 100, 100, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-slot:hover {
+    background: linear-gradient(135deg, rgba(200, 200, 200, 0.4) 0%, rgba(150, 150, 150, 0.15) 100%) !important;
+    border-color: rgba(61, 255, 204, 0.8) !important;
+}
+
+.custom-slot:hover .plus-sign {
+    color: #3DFFCC;
+    font-size: 90px;
 }
 
 /* Edit mode active state */
